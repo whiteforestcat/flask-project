@@ -1,0 +1,6 @@
+{% for job in jobs %}
+<div>Title: {{job["title"]}}</div>
+<div>Location: {{job["location"]}}</div>
+{% if "salary" in job%}
+<div>Salary: {{job["salary"]}}</div>
+{% endif %} {% endfor %}
