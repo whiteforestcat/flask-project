@@ -45,7 +45,9 @@ def hello_world():
 @app.route("/api/jobs")
 def list_jobs():
     jobs = load_jobs_from_db()
-    return jsonify(jobs)
+    print(type(jobs))
+    # return jsonify(jobs)
+    return render_template("rawdata.html", jobs=jobs)
 
 if __name__ == '__main__':
     app.run(debug=True)
