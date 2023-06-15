@@ -13,19 +13,19 @@ engine = create_engine(
     connect_args={"ssl": {"ssl_ca": "/etc/ssl/cert.pem"}},
 )
 
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM jobs"))
-    result_all = result.all()
-    # xxx.all() to print all the associated rows
-    # need to store result.all() into a variable cos result.all() can only be called once
-    result_dicts = (
-        []
-    )  # result.all() is an sqlalchemy data structure, need to convert into normal dict
-    for row in result_all:
-        result_dicts.append(row._mapping)
-    print(result_dicts[0])
-    print(result_dicts[1])
-    print(result_dicts)
+# with engine.connect() as conn:
+#     result = conn.execute(text("SELECT * FROM jobs"))
+#     result_all = result.all()
+#     # xxx.all() to print all the associated rows
+#     # need to store result.all() into a variable cos result.all() can only be called once
+#     result_dicts = (
+#         []
+#     )  # result.all() is an sqlalchemy data structure, need to convert into normal dict
+#     for row in result_all:
+#         result_dicts.append(row._mapping)
+#     print(result_dicts[0])
+#     print(result_dicts[1])
+#     print(result_dicts)
 
 
 def load_jobs_from_db():
