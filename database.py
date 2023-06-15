@@ -9,13 +9,26 @@ engine = create_engine(
     },
 )
 
-with engine.connect() as conn:
-    result = conn.execute(text("SELECT * FROM jobs"))
-    result_all = result.all()
-    # xxx.all() to print all the associated rows
-    # need to store result.all() into a variable cos result.all() can only be called once
-    result_dicts = [] # result.all() is an sqlalchemy data structure, need to convert into normal dict
-    for row in result_all:
-        result_dicts.append(row._mapping)
-    print(result_dicts[0])
-    print(result_dicts[1])
+# with engine.connect() as conn:
+#     result = conn.execute(text("SELECT * FROM jobs"))
+#     result_all = result.all()
+#     # xxx.all() to print all the associated rows
+#     # need to store result.all() into a variable cos result.all() can only be called once
+#     result_dicts = [] # result.all() is an sqlalchemy data structure, need to convert into normal dict
+#     for row in result_all:
+#         result_dicts.append(row._mapping)
+#     print(result_dicts[0])
+#     print(result_dicts[1])
+
+def load_jobs_from_db():
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT * FROM jobs"))
+        result_all = result.all()
+        # xxx.all() to print all the associated rows
+        # need to store result.all() into a variable cos result.all() can only be called once
+        db_jobs = [] # result.all() is an sqlalchemy data structure, need to convert into normal dict
+        for row in result_all:
+            db_jobs.append(row._mapping)
+        # print(jobs[0])
+        # print(jobs[1])
+        return db_jobs
