@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 
 engine = create_engine(
-    "mysql+pymysql://r5ijilveql67r8mcxre0:pscale_pw_87qVcs9Ckwn68S4suj64ixEjgHgP9ll3KOBSGgGuxBb@aws.connect.psdb.cloud/flaskp1?charset=utf8mb4",
+    "mysql+pymysql://59qvbidwvr4v0pmh8onv:pscale_pw_zoxURvglyUmmJVXpVB3HNPwloYn1nyaS4qdKuG3MqS4@aws.connect.psdb.cloud/flaskp1?charset=utf8mb4",
     connect_args={
         "ssl": {
             "ssl_ca": "/etc/ssl/cert.pem"
@@ -11,4 +11,11 @@ engine = create_engine(
 
 with engine.connect() as conn:
     result = conn.execute(text("SELECT * FROM jobs"))
-    print(result.all())  # xxx.all() to print all the associated rows
+    result_all = result.all()
+    # xxx.all() to print all the associated rows
+    # need to store result.all() into a variable cos result.all() can only be called once
+    result_dicts = [] # result.all() is an sqlalchemy data structure, need to convert into normal dict
+    for row in result_all:
+        result_dicts.append(row._mapping)
+    print(result_dicts[0])
+    print(result_dicts[1])
