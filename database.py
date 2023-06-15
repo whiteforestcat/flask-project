@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, text
 
 engine = create_engine(
-    "mysql+pymysql://59qvbidwvr4v0pmh8onv:pscale_pw_zoxURvglyUmmJVXpVB3HNPwloYn1nyaS4qdKuG3MqS4@aws.connect.psdb.cloud/flaskp1?charset=utf8mb4",
+    "mysql+pymysql://k8150s4gizrl3idwbtrf:pscale_pw_loyeLJRvRVpveItIbUPAjDIAaK2f6ifBcwUSFEPiZYm@aws.connect.psdb.cloud/flaskp1?charset=utf8mb4",
     connect_args={
         "ssl": {
             "ssl_ca": "/etc/ssl/cert.pem"

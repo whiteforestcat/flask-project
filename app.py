@@ -42,9 +42,10 @@ def hello_world():
 
 # by default, ("/static/xxx.png") route will show you the image
 
-# @app.route("/api/jobs")
-# def list_jobs():
-#     return jsonify(dummy_jobs)
+@app.route("/api/jobs")
+def list_jobs():
+    jobs = load_jobs_from_db()
+    return jsonify(jobs)
 
 if __name__ == '__main__':
     app.run(debug=True)
