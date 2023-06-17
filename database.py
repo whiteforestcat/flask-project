@@ -50,7 +50,7 @@ def load_single_job(id):
         result = conn.execute(query.bindparams(val=id))
         rows = result.all()
         if len(rows) == 0:
-            return "No Job Found"
+            return None # returns false so that this false value can create Error 404 page
         else:
             # return dict(rows[0])
             db_jobs = []

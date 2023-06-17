@@ -57,7 +57,10 @@ def list_jobs():
 @app.route("/job/<id>")
 def show_job(id):
     job = load_single_job(id)
+    if not job: # in controller, here will be None data type. meaning if (!job) is JS
+        return "Job Not found", 404
     return render_template("jobpage.html", job=job)
+
 
 
 if __name__ == "__main__":
