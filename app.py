@@ -57,7 +57,7 @@ def list_jobs():
 @app.route("/job/<id>")
 def show_job(id):
     job = load_single_job(id)
-    return render_template("rawdata.html", jobs=job)
+    return render_template("jobpage.html", job=job)
 
 
 if __name__ == "__main__":

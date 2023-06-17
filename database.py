@@ -38,6 +38,8 @@ def load_jobs_from_db():
         # result.all() is an sqlalchemy data structure, need to convert into normal dict
         for row in result_all:
             db_jobs.append(row._mapping)
+        # print(type(db_jobs))
+        # print(db_jobs)
         return db_jobs
 
 
@@ -48,10 +50,13 @@ def load_single_job(id):
         result = conn.execute(query.bindparams(val=id))
         rows = result.all()
         if len(rows) == 0:
-            return None
+            return "No Job Found"
         else:
             # return dict(rows[0])
             db_jobs = []
+            print("number of rows in query", len(rows))
             for row in rows:
                 db_jobs.append(row._mapping)
-            return db_jobs
+            # print(db_jobs)
+            # print(db_jobs[0])
+            return db_jobs[0]
