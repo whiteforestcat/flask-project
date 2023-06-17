@@ -37,7 +37,7 @@ def load_jobs_from_db():
         db_jobs = []
         # result.all() is an sqlalchemy data structure, need to convert into normal dict
         for row in result_all:
-            db_jobs.append(row._mapping)
+            db_jobs.append(dict(row._asdict()))
         # print(type(db_jobs))
         # print(db_jobs)
         return db_jobs

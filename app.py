@@ -50,8 +50,8 @@ def hello_world():
 def list_jobs():
     jobs = load_jobs_from_db()
     print(type(jobs))
-    # return jsonify(jobs)
-    return render_template("rawdata.html", jobs=jobs)
+    return jsonify(jobs)
+    # return render_template("rawdata.html", jobs=jobs)
 
 
 @app.route("/job/<id>")
