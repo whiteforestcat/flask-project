@@ -50,7 +50,9 @@ def load_single_job(id):
         result = conn.execute(query.bindparams(val=id))
         rows = result.all()
         if len(rows) == 0:
-            return None # returns false so that this false value can create Error 404 page
+            return (
+                None  # returns false so that this false value can create Error 404 page
+            )
         else:
             # return dict(rows[0])
             db_jobs = []
@@ -60,3 +62,23 @@ def load_single_job(id):
             # print(db_jobs)
             # print(db_jobs[0])
             return db_jobs[0]
+
+
+def add_application_to_db(job_id, application):
+    with engine.connect() as conn:
+        query = text(
+            "INSERT INTO applications (job_id, full_name, email, linkedin, education) VALUES (:job_id, :full_name, :email, :linked_in, :education)"
+        )
+        # remember that the first variables are the column names in table and second variables are the values you want to put in
+        # in this case, these values here are the values of the form key-value pair (ie name-input_value pairs)
+        result = conn.execute(
+            query.bindparams(
+                job_id=job_id,
+                full_name=application.get("full_name"),
+                email=application.get("email"),
+                linked_in=application.get("linked_in"),
+                education=application.get("education"),
+            )
+        )
+        # up to this point, data is sent to DB, no need return json
+        

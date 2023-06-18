@@ -2,10 +2,12 @@ from flask import (
     Flask,  # flask is library name, Flask is class in flask library
     render_template,
     jsonify,  # to return json in endpoints
+    request,  # enables us to use params in url after "?"
 )
 from database import (
     load_jobs_from_db,  # importing engine from database.py file
     load_single_job,
+    add_application_to_db,
 )
 
 app = Flask(__name__)
@@ -57,10 +59,22 @@ def list_jobs():
 @app.route("/job/<id>")
 def show_job(id):
     job = load_single_job(id)
-    if not job: # in controller, here will be None data type. meaning if (!job) is JS
+    if not job:  # in controller, here will be None data type. meaning if (!job) is JS
         return "Job Not found", 404
     return render_template("jobpage.html", job=job)
 
+
+@app.route("/job/<id>/apply", methods=["post"])
+def apply_to_job(id):
+    # data = request.args # information stored in url can be accesssed via request.args, need to leave out methods if want to store info in url
+    data = request.form  # to access data when using methods
+    job = load_single_job(id)
+    # return jsonify(data)
+    # this returns form in json format
+    # where keys are the name attribute of input HTML element and values are the user input values of the input box
+    # can store this data in DB, see below
+    add_application_to_db(id, data)
+    return render_template("application_submit.html", application=data, job=job)
 
 
 if __name__ == "__main__":
