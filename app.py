@@ -34,7 +34,7 @@ app = Flask(__name__)
 
 
 # remember that @ is decorator
-@app.route("/")
+@app.get("/")
 def hello_world():
     db_jobs = load_jobs_from_db()  # storing return result of function into variable
     return render_template(
@@ -48,7 +48,7 @@ def hello_world():
 # by default, ("/static/xxx.png") route will show you the image
 
 
-@app.route("/api/jobs")
+@app.get("/api/jobs")
 def list_jobs():
     jobs = load_jobs_from_db()
     print(type(jobs))
@@ -56,7 +56,7 @@ def list_jobs():
     # return render_template("rawdata.html", jobs=jobs)
 
 
-@app.route("/job/<id>")
+@app.get("/job/<id>")
 def show_job(id):
     job = load_single_job(id)
     if not job:  # in controller, here will be None data type. meaning if (!job) is JS
@@ -64,7 +64,7 @@ def show_job(id):
     return render_template("jobpage.html", job=job)
 
 
-@app.route("/job/<id>/apply", methods=["post"])
+@app.post("/job/<id>/apply")
 def apply_to_job(id):
     # data = request.args # information stored in url can be accesssed via request.args, need to leave out methods if want to store info in url
     data = request.form  # to access data when using methods
