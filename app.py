@@ -76,6 +76,10 @@ def apply_to_job(id):
     add_application_to_db(id, data)
     return render_template("application_submit.html", application=data, job=job)
 
+# render_template is the html page that is called when endpoint is called
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# following up, use mailjet to send admin email when job application is submitted
+# for captcha, use hcaptcha
